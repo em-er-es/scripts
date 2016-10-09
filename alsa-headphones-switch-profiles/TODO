@@ -1,0 +1,4 @@
+091016
+*Add EQ profile switch capability
+*Clean up service file
+*Optimize read/write operations by syncing to disk last states only

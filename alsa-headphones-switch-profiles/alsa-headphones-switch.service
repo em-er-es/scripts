@@ -1,0 +1,13 @@
+[Unit]
+Description=ALSA headphones volume control switch
+After=sound.target
+
+[Service]
+Type=forking
+Nice=10
+ExecStart=/usr/bin/bash '/etc/systemd/scripts/alsa-headphones-service.sh'
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
