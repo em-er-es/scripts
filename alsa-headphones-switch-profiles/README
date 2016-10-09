@@ -1,0 +1,11 @@
+Determine a jack plug state change and switch between ALSA profiles accordingly.
+*Uses Systemd for service and logging
+*Main script alsa-headphones-service.sh used to not flood log service with messages
+*Writing to /tmp, which should be a tmpfs, in order to improve energy efficiency
+
+Installation
+*Save scripts in /etc/systemd/scripts
+*Save service file in /etc/systemd/system
+*Reload Systemd's daemon configuration
+*Enable and start the service
+*Audio group permissions might be necessary for alsactl restoring state
