@@ -1,3 +1,5 @@
+201116
+*Moved to /run from /tmp, which should be a tmpfs
 091016
 *Add EQ profile switch capability
 *Clean up service file

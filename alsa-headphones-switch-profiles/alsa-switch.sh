@@ -6,8 +6,8 @@ SPLEVEL=127;
 FULLVOL=('Master' 'Speaker' 'PCM');
 MUTEVOL=('Headphone');
 CHECKCTRL='Auto-Mute Mode';
-STATEFILESP="/tmp/.asound-sp.state";
-STATEFILEHP="/tmp/.asound-hp.state";
+STATEFILESP="/run/asound-sp.state";
+STATEFILEHP="/run/asound-hp.state";
 
 checksw(){
 amixer -D "$ALSAHWDEV" get "${CHECKCTRL}" | grep -e "Item0"\.\*"Enabled" &>/dev/null && \
