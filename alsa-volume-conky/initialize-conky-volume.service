@@ -1,0 +1,21 @@
+[Unit]
+Description=Conky volume bar
+After=sound.target tmp.mount
+
+[Service]
+Type=oneshot
+Nice=10
+ExecStartPre=/usr/bin/dd if=/dev/zero of=/tmp/vol.disk count=272
+ExecStartPre=/usr/bin/mkfs.minix /tmp/vol.disk
+ExecStartPre=/usr/bin/mkdir -m 777 /tmp/vol
+ExecStartPre=/usr/bin/sh -c "while ! (pidof conky); do sleep 10; done"
+ExecStart=/usr/bin/mount -t minix /tmp/vol.disk /tmp/vol
+ExecStartPost=/usr/bin/sh -c "/usr/bin/dd if=/dev/zero of=/tmp/vol/volume count=$(amixer -c PCH sget Master | awk '/dB/{x = $3 * 2; print x}')"
+ExecStartPost=/usr/bin/chmod 777 /tmp/vol/volume
+ExecStartPost=/usr/bin/sh -c "sleep 4; while (pidof conky); do sleep 300; done"
+ExecStop=/usr/bin/umount /tmp/vol
+ExecStopPost=/usr/bin/rm -r /tmp/vol
+ExecStopPost=/usr/bin/rm /tmp/vol.disk
+
+[Install]
+WantedBy=multi-user.target

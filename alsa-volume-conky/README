@@ -1,0 +1,12 @@
+Change volume in "smooth" manner using specyfing number of steps and interval.
+Display current volume in as used storage capacity in a minix filesystem for Conky.
+*Uses Systemd for initializing of current volume
+*Writing to /tmp, which should be a tmpfs, in order to improve energy efficiency
+
+Installation
+*Install as executable in $PATH
+*Associate with keyshortcuts or other input of preference
+*Save service file in /etc/systemd/system
+*Reload Systemd's daemon configuration
+*Enable and start the service
+*Add Conky snippet for volume display bar and value in dB and %
