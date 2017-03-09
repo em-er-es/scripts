@@ -2,7 +2,7 @@
 EQDEV="equalizer";
 EQRESETLEVEL=60;
 EQBANDS=('00. 31 Hz' '01. 63 Hz' '02. 125 Hz' '03. 250 Hz' '04. 500 Hz' '05. 1 kHz' '06. 2 kHz' '07. 4 kHz' '08. 8 kHz' '09. 16 kHz');
-EQP00=(0 0 0 0 0 0 0 0 0 0); # Full damping
+EQP00=(0 0 0 0 0 0 0 0 0 0); # Full turn down
 EQP01=(60 56 52 48 44 54 56 58 60 60); # Passive
 EQP02=(68 64 60 55 50 60 62 64 66 68); # Active
 EQP0F=(100 100 100 100 100 100 100 100 100 100); # Full gain
@@ -36,10 +36,11 @@ if [[ $# -eq 0 ]]; then geteq; else
 		[rR][eE][sS][eE][tT])
 		reseteq;;
 		EQP*)
-		if [[
 		seteq "$@";;
 		*)
-		echo A
-		geteq;;
+		echo "Current equalizer settings:";
+		geteq;
+		echo -e "Incorrect preset name. Available presets:\n${!EQP*}";
+		exit 1;
 	esac
 fi
