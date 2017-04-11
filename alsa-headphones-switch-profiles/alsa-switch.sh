@@ -9,17 +9,11 @@ CHECKCTRL='Auto-Mute Mode';
 STATEFILESP="/run/asound-sp.state";
 STATEFILEHP="/run/asound-hp.state";
 
-checksw(){
-amixer -D "$ALSAHWDEV" get "${CHECKCTRL}" | grep -e "Item0"\.\*"Enabled" &>/dev/null && \
-amixer -D "$ALSAHWDEV" get "${MUTEVOL[0]}" | grep -e "Front Left:"\.\*'\[on\]$' -e "Front Right:"\.\*'\[on\]$' &>/dev/null && \
-swhp || swsp;
-}
-
 swsp(){
 alsactl store "$ALSADEV" -f "$STATEFILEHP";
-if [[ -f "$STATEFILESP" ]]; then 
+if [[ -f "$STATEFILESP" ]]; then
 	alsactl restore "$ALSADEV" -f "$STATEFILESP";
-else 
+else
 	for CCTRL in $(seq 1 ${#MUTEVOL[@]}); do
 		amixer -D "$ALSAHWDEV" set "${MUTEVOL[$((CCTRL-1))]}" mute &> /dev/null;
 	done
@@ -31,7 +25,7 @@ fi
 
 swhp(){
 alsactl store "$ALSADEV" -f "$STATEFILESP";
-if [[ -f "$STATEFILEHP" ]]; then 
+if [[ -f "$STATEFILEHP" ]]; then
 	alsactl restore "$ALSADEV" -f "$STATEFILEHP";
 else
 	for CCTRL in $(seq 1 ${#MUTEVOL[@]}); do
@@ -44,6 +38,12 @@ else
 		fi
 	done
 fi
+}
+
+checksw(){
+amixer -D "$ALSAHWDEV" get "${CHECKCTRL}" | grep -e "Item0"\.\*"Enabled" &>/dev/null && \
+amixer -D "$ALSAHWDEV" get "${MUTEVOL[0]}" | grep -e "Front Left:"\.\*'\[on\]$' -e "Front Right:"\.\*'\[on\]$' &>/dev/null && \
+swhp || swsp;
 }
 
 if [[ $# -eq 0 ]]; then checksw; elif [[ "$@" == [hH][pP] ]]; then swhp; else swsp "$@"; fi
