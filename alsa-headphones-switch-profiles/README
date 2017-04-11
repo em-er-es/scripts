@@ -9,3 +9,7 @@ Installation
 *Reload Systemd's daemon configuration
 *Enable and start the service
 *Audio group permissions might be necessary for alsactl restoring state
+*Create initial alsa mixer settings using
+	$ alsactl store -f <FILE>
+	for both profiles: sp -- speaker and hp -- headphones
+*Save the initial mixer settings as /etc/asound-sp.state and /etc/asound-hp.state

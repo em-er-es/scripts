@@ -1,0 +1,6 @@
+110417
+*Changed order of alsa-switch function checksw
+281116
+*Fixed typo in script
+201116
+*Moved to /run from /tmp, which should be a tmpfs
