@@ -10,6 +10,7 @@ List of scripts:
 |:------:|:-----------:|
 | aamixer.sh | Smooth ALSA mixer control |
 | toggle-focus-active.sh | Scipt toggles process state via sending STOP/CONT signals between set of application based on what is in focus. This can help free up limited resources and automate switching context between resource heavy applications. |
+| wm-sort.py | Sort windows according to regex patterns. Can use external `yaml` files as configuration. |
 |  |  |
 
 ## Gists
