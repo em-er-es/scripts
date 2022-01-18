@@ -1,0 +1,13 @@
+[Unit]
+Description=Suspend service for the duration of sleep
+Before=sleep.target
+StopWhenUnneeded=yes
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/systemctl stop %I
+ExecStop=/bin/systemctl start %I
+
+[Install]
+WantedBy=sleep.target
