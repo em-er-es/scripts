@@ -1,0 +1,36 @@
+[Unit]
+Description=Load RT3290 bluetooth kernel module
+Requires=systemd-udev-settle.service
+After=network.target
+
+[Service]
+Type=simple
+RemainAfterExit=yes
+
+ExecStartPre=/usr/bin/bluetooth off
+ExecStartPre=/bin/sleep 0.5
+ExecStartPre=/usr/bin/wifi off
+ExecStartPre=/bin/sleep 0.5
+ExecStartPre=-/usr/bin/pkill -2 rtbt
+ExecStartPre=/bin/sleep 0.5
+ExecStartPre=-/sbin/modprobe -r rtbth
+ExecStartPre=-/bin/rm /dev/rtbth
+ExecStartPre=/bin/sleep 1
+ExecStart=/sbin/modprobe rtbth
+ExecStartPost=/bin/sleep 0.5
+ExecStartPost=/usr/bin/bluetooth on
+ExecStartPost=/bin/sleep 0.5
+ExecStartPost=/usr/bin/wifi on
+#ExecStartPost=/usr/bin/bluetooth off
+
+ExecStop=-/usr/bin/pkill -2 rtbt
+ExecStop=/bin/sleep 0.5
+ExecStop=-/sbin/modprobe -r rtbth
+ExecStopPost=-/bin/rm /dev/rtbth
+
+LimitNPROC=1
+ProtectHome=true
+ProtectSystem=strict
+
+[Install]
+WantedBy=network.target
