@@ -20,3 +20,13 @@ List of gists that didn't make it into this repository:
 | Script | Description | URL |
 |:------:|:-----------:|:---:|
 |  |  |  |
+
+## Systemd
+
+List of systemd entries:
+
+| Entity | Description |
+|:------:|:-----------:|
+| bluetooth-rt3290.service | Handles the RT3290 bluetooth kernel module |
+| stop-during-suspend@.service | Suspends services for the duration of sleep cycle |
+| stop-during-suspend@bluetooth-rt3290.service | Suspends BT service to sustain functionality after resume |
