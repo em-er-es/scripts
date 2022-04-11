@@ -8,18 +8,16 @@ Type=simple
 RemainAfterExit=yes
 
 ExecStartPre=/usr/bin/bluetooth off
-ExecStartPre=/bin/sleep 0.5
 ExecStartPre=/usr/bin/wifi off
-ExecStartPre=/bin/sleep 0.5
 ExecStartPre=-/usr/bin/pkill -2 rtbt
 ExecStartPre=/bin/sleep 0.5
 ExecStartPre=-/sbin/modprobe -r rtbth
 ExecStartPre=-/bin/rm /dev/rtbth
-ExecStartPre=/bin/sleep 1
+ExecStartPre=/bin/sleep 0.5
 ExecStart=/sbin/modprobe rtbth
-ExecStartPost=/bin/sleep 0.5
+ExecStartPost=/bin/sleep 2
 ExecStartPost=/usr/bin/bluetooth on
-ExecStartPost=/bin/sleep 0.5
+ExecStartPost=/bin/sleep 1
 ExecStartPost=/usr/bin/wifi on
 #ExecStartPost=/usr/bin/bluetooth off
 
